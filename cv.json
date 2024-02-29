@@ -1,66 +1,88 @@
 {
   "basics": {
-    "name": "Miguel Ángel Durán",
-    "label": "Full Stack Developer con más de 15 años de experiencia & Creador de Contenido de Programación",
+    "name": "Cristian Gimenez",
+    "label": "Software Backend & Mobile Developer con más de 10 años de experiencia",
     "image": "/me.webp",
-    "email": "miduga@gmail.com",
-    "phone": "+34 688888888",
-    "url": "https://midu.dev",
-    "summary": "+15 años de experiencia como Desarrollador Web. Actualmente soy Creador de Contenido y Divulgador sobre Programación. Vivo en Barcelona, España. He trabajado en diferentes entornos: desde acelerar el desarrollo de start-ups hasta liderando equipos de empresas multinacionales.",
+    "email": "mail@cri.st",
+    "phone": "",
+    "url": "https://cri.st",
+    "summary": "+10 años de experiencia como Desarrollador. Vivo en Buenos Aires, Argentina. He trabajado en diferentes entornos: desde acelerar el desarrollo de start-ups hasta en equipos de empresas multinacionales.",
     "location": {
       "address": "",
-      "postalCode": "08820",
-      "city": "el Prat de Llobregat",
-      "countryCode": "ES",
-      "region": "España"
+      "postalCode": "1425",
+      "city": "Buenos Aires",
+      "countryCode": "AR",
+      "region": "Argentina"
     },
     "profiles": [
       {
         "network": "LinkedIn",
-        "username": "midudev",
-        "url": "https://linkedin.com/in/midudev"
+        "username": "cri-st",
+        "url": "https://linkedin.com/in/cri-st"
       },
       {
         "network": "X",
-        "username": "midudev",
-        "url": "https://x.com/midudev"
+        "username": "crist_gmnz",
+        "url": "https://x.com/crist_gmnz"
       },
       {
         "network": "GitHub",
-        "username": "midudev",
-        "url": "https://github.com/midudev"
+        "username": "cri-st",
+        "url": "https://github.com/cri-st"
       }
     ]
   },
   "work": [
     {
-      "name": "midudev",
-      "position": "Divulgador sobre Programación Web",
-      "url": "https://twitch.tv/midudev",
-      "startDate": "2021-01-01",
+      "name": "candoit",
+      "position": "Desarrollador Backend",
+      "url": "https://candoit.com.ar/",
+      "startDate": "2022-10-18",
       "endDate": null,
-      "summary": "Streamer de programación más visto en Español en Twitch. +1 millón de seguidores entre todas mis redes sociales. Reconocido por Google, Microsoft y GitHub por mi impacto en la comunidad de desarrolladores.",
+      "summary": "Desarrollo de soluciones personalizadas para empresas.",
       "highlights": [
         "Started the company"
       ]
     },
     {
-      "name": "Adevinta",
-      "position": "Lead Frontend Architect",
-      "url": "https://twitch.tv/midudev",
-      "startDate": "2016-06-01",
-      "endDate": "2022-09-01",
-      "summary": "Lideré una convergencia técnica entre diferentes productos y migramos una arquitectura monolítica a otra más flexible y optimizada. Fomenté buenas prácticas y mejoras en la cultura de rendimiento, además de la entrega rápida de valor a los usuarios.",
+      "name": "Santander Tecnología",
+      "position": "Desarrollador Backend",
+      "url": "https://www.santander.com.ar/",
+      "startDate": "2021-09-01",
+      "endDate": "2022-05-01",
+      "summary": "Proyecto de préstamos - Agro. Digitalizar la experiencia de los préstamos para el sector agroindustrial. Creación de APIs REST para la carga de datos/formularios, generación de ofertas y simulaciones.",
       "highlights": [
         "Started the company"
       ]
     },
     {
-      "name": "Hubii",
-      "position": "Senior FrontEnd Developer",
-      "startDate": "2011-03-01",
-      "endDate": "2016-05-01",
-      "summary": "Desarrollé una plataforma de noticias geolocalizadas y una API para consumir la información. Escalé los servicios para soportar la carga de más de cientos de miles de peticiones al día. Recorté los tiempos de entrega y despliegues a producción a la mitad. Colaboré con Mozilla y Telefónica para desarrollar la primera app para televisores con FirefoxOS.",
+      "name": "Adtomic",
+      "position": "Full Stack Developer",
+      "url": "https://www.adtomic.ai/",
+      "startDate": "2019-04-01",
+      "endDate": "2021-08-01",
+      "summary": "Desarrollamos y mantenemos la plataforma de IA para comercio electrónico que automatiza la creación y optimización de campañas de marketing en Google, Face- book e Instagram utilizando JAVA, Python y Angular (entre otras tecnologías), uti- lizada por más de 200 clientes de gran escala cada día para gestionar sus anuncios.",
+      "highlights": [
+        "Started the company"
+      ]
+    },
+    {
+      "name": "Mercado Libre",
+      "position": "iOS Developer",
+      "url": "https://mercadolibre.com/",
+      "startDate": "2016-01-01",
+      "endDate": "2019-03-01",
+      "summary": "Desarrollo y Mantenimiento de iniciativas en el Checkout de la app Mercado Libre. Desarrollo de iniciativas de recarga de móviles y pago de facturas en la app de Mercado Pago.",
+      "highlights": [
+        "Started the company"
+      ]
+    },
+    {
+      "name": "Monits",
+      "position": "Java Developer",
+      "startDate": "2011-09-01",
+      "endDate": "2016-01-01",
+      "summary": "Desarrollo, actualización y mantenimiento del sistema web de una importante empresa de venta de paquetes turísticos utilizando JAVA con Spring MVC/Framework. Desarrollo de sistemas de gestión interna utilizando JAVA con Wicket y Spring.",
       "highlights": [
         "Started the company"
       ]
@@ -77,18 +99,7 @@
       "Awarded 'Volunteer of the Month'"
     ]
   }],
-  "education": [{
-    "institution": "Universitat Oberta de Catalunya",
-    "url": "https://www.uoc.edu/portal/es/index.html",
-    "area": "Ingeniero de Software",
-    "studyType": "Bachelor",
-    "startDate": "2003-01-01",
-    "endDate": "2009-01-01",
-    "score": "4.0",
-    "courses": [
-      "DB1101 - Basic SQL"
-    ]
-  }],
+  "education": [],
   "awards": [{
     "title": "Award",
     "date": "2014-11-01",
@@ -110,43 +121,59 @@
   }],
   "skills": [
     {
-      "name": "HTML",
+      "name": "Java",
       "level": "Master",
       "keywords": [
-        "Desarrollo Web", "Frontend"
+        "Desarrollo Web", "Backend"
       ]
     },
     {
-      "name": "CSS",
-      "level": "Master",
+      "name": "Kotlin",
+      "level": "Avanzado",
       "keywords": [
-        "Desarrollo Web", "Frontend", "Diseño Responsive"
+        "Desarrollo Web", "Backend"
+      ]
+    },
+    {
+      "name": "Swift",
+      "level": "Avanzado",
+      "keywords": [
+        "Desarrollo Movil", "Frontend"
+      ]
+    },
+    {
+      "name": "Python",
+      "keywords": [
+        "Desarrollo Apps", "Backend"
       ]
     },
     {
       "name": "JavaScript",
-      "level": "Master",
       "keywords": [
         "Desarrollo Web", "Frontend", "Backend", "Fullstack"
       ]
     },
     {
-      "name": "Tailwind",
-      "level": "Avanzado",
+      "name": "TypeScript",
+      "keywords": [
+        "Desarrollo Web", "Frontend", "Backend", "Fullstack"
+      ]
+    },
+    {
+      "name": "SpringBoot",
+      "level": "Master",
+      "keywords": [
+        "Desarrollo Web", "Backend"
+      ]
+    },
+    {
+      "name": "AngularJS",
       "keywords": [
         "Desarrollo Web", "Frontend", "CSS Framework", "Diseño Responsive"
       ]
     },
     {
-      "name": "TypeScript",
-      "level": "Avanzado",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "Backend", "JavaScript Superset"
-      ]
-    },
-    {
       "name": "Node",
-      "level": "Avanzado",
       "keywords": [
         "Desarrollo Web", "Backend", "JavaScript", "Servidor"
       ]
@@ -156,6 +183,19 @@
       "level": "Avanzado",
       "keywords": [
         "Bases de Datos", "SQL", "Almacenamiento de Datos", "Backend"
+      ]
+    },
+    {
+      "name": "PostgreSQL",
+      "level": "Avanzado",
+      "keywords": [
+        "Bases de Datos", "SQL", "Almacenamiento de Datos", "Backend"
+      ]
+    },
+    {
+      "name": "MongoDB",
+      "keywords": [
+        "Bases de Datos", "No-SQL", "Almacenamiento de Datos", "Backend"
       ]
     },
     {
@@ -171,20 +211,6 @@
       "keywords": [
         "Control de Versiones", "Colaboración", "Código Fuente", "Git"
       ]
-    },
-    {
-      "name": "Next.js",
-      "level": "Avanzado",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "React Framework", "SSR", "Static Generation"
-      ]
-    },
-    {
-      "name": "React",
-      "level": "Avanzado",
-      "keywords": [
-        "Desarrollo Web", "Frontend", "JavaScript Library", "UI"
-      ]
     }
   ],
   "languages": [
@@ -194,7 +220,7 @@
     },
     {
       "language": "English",
-      "fluency": "Advanced"
+      "fluency": "Basic"
     }
   ],
   "interests": [{
