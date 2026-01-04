@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Block access to specific directories if needed
+# Disallow: /private/
+
+# Sitemap location (update with your actual sitemap URL)
+# Sitemap: https://cri.st/sitemap.xml

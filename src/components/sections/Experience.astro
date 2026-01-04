@@ -1,5 +1,6 @@
 ---
 import Section from "../Section.astro"
+import { getSafeUrl } from "@/utils/urlValidation"
 
 import { work } from "@cv"
 ---
@@ -8,11 +9,12 @@ import { work } from "@cv"
   <ul>
     {
       work.map(
-        ({ name, startDate, endDate, position, summary, highlights, url }) => {
+        ({ name, startDate, endDate, position, summary, url }) => {
           const startYear = new Date(startDate).getFullYear()
           const endYear =
             endDate != null ? new Date(endDate).getFullYear() : "Actual"
           const years = `${startYear} - ${endYear}`
+          const safeUrl = getSafeUrl(url || '#')
 
           return (
             <li>
@@ -20,7 +22,7 @@ import { work } from "@cv"
                 <header>
                   <div>
                     <h3>
-                      <a href={url} title={`Ver ${name}`} target="_blank">
+                      <a href={safeUrl} title={`Ver ${name}`} target="_blank" rel="noopener noreferrer">
                         {name}
                       </a>
                     </h3>
