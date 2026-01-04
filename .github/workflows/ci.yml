@@ -1,4 +1,4 @@
-name: CI
+name: CI and Deploy
 
 on:
   push:
@@ -6,8 +6,14 @@ on:
   pull_request:
     branches: [main]
 
+# Permissions needed for deployment
+permissions:
+  contents: read
+  deployments: write
+
 jobs:
-  lint-and-security:
+  # Job 1: Linters and Security Checks
+  ci:
     name: Linters and Security Checks
     runs-on: ubuntu-latest
 
@@ -39,12 +45,11 @@ jobs:
           # Scan all source files, excluding: docs, config files and known safe files
           echo "Scanning for secrets in source files (.astro, .ts, .js, .tsx, .jsx)..."
           if grep -r -iE '(password["\''\s=]|secret["\''\s=]|api[_-]?key["\''\s=]|token["\''\s=]|private[_-]?key["\''\s=])' --include='*.astro' --include='*.ts' --include='*.tsx' --include='*.js' --include='*.jsx' --exclude-dir=node_modules --exclude-dir=.astro --exclude-dir=dist src/ public/ 2>/dev/null; then
-            echo "::error::Potential secrets found in source files!"
+            echo "::error::Potential secrets found in code!"
             exit 1
           else
             echo "✅ No secrets detected in source files."
           fi
-        continue-on-error: false
 
       - name: Check for hardcoded URLs
         run: |
@@ -56,12 +61,33 @@ jobs:
             echo "ℹ️  Found localhost references (this is normal for development)"
           fi
           echo "✅ URL check completed."
-        continue-on-error: true
 
-      - name: Check for hardcoded URLs
-        run: |
-          echo "Checking for hardcoded URLs that shouldn't be there..."
-          if git diff --name-only HEAD~1 | grep -vE '^\.github/|^package\.json|^package-lock\.json$' | xargs -r grep -iE 'http://localhost|127\.0\.0\.1|0\.0\.0\.0'; then
-            echo "::warning::Hardcoded localhost URLs detected - ensure these are intended"
-          fi
-        continue-on-error: true
+  # Job 2: Deploy to Cloudflare Pages (Solo si CI pasó)
+  deploy:
+    name: Deploy to Cloudflare Pages
+    needs: ci  # Solo se ejecuta si el job 'ci' pasó exitosamente
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Solo deploy en push a main
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=minimalist-resume
