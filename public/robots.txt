@@ -5,5 +5,5 @@ Allow: /
 # Block access to specific directories if needed
 # Disallow: /private/
 
-# Sitemap location (update with your actual sitemap URL)
-# Sitemap: https://cri.st/sitemap.xml
+# Sitemap location
+Sitemap: https://cri.st/sitemap.xml

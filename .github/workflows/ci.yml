@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-security:
+    name: Linters and Security Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npx astro check
+
+      - name: Build
+        run: npm run build
+
+      - name: Security audit
+        run: npm audit --audit-level=high
+
+      - name: Check for secrets
+        run: |
+          echo "Checking for leaked secrets in the codebase..."
+          if git diff --name-only HEAD~1 | grep -vE '^\.github/|^package\.json|^package-lock\.json$' | xargs -r grep -iE '(password|secret|api[_-]?key|token|private[_-]?key)'; then
+            echo "::error::Potential secrets found in code!"
+            exit 1
+          else
+            echo "No secrets detected."
+          fi
+        continue-on-error: true
+
+      - name: Check for hardcoded URLs
+        run: |
+          echo "Checking for hardcoded URLs that shouldn't be there..."
+          if git diff --name-only HEAD~1 | grep -vE '^\.github/|^package\.json|^package-lock\.json$' | xargs -r grep -iE 'http://localhost|127\.0\.0\.1|0\.0\.0\.0'; then
+            echo "::warning::Hardcoded localhost URLs detected - ensure these are intended"
+          fi
+        continue-on-error: true
