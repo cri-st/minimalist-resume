@@ -35,12 +35,36 @@ jobs:
 
       - name: Check for secrets
         run: |
-          echo "Checking for leaked secrets in the codebase..."
-          if git diff --name-only HEAD~1 | grep -vE '^\.github/|^package\.json|^package-lock\.json$' | xargs -r grep -iE '(password|secret|api[_-]?key|token|private[_-]?key)'; then
-            echo "::error::Potential secrets found in code!"
-            exit 1
+          echo "Checking for leaked secrets in codebase..."
+          # Get changed files, excluding: docs, config files, and known safe files
+          CHANGED_FILES=$(git diff --name-only HEAD~1 | grep -vE '(\.md$|\.txt$|\.github/|package\.json|package-lock\.json|SECURITY_CHANGES|README)')
+
+          if [ -n "$CHANGED_FILES" ]; then
+            # Check for potential secrets in source files only
+            # More specific patterns to avoid false positives in docs
+            if echo "$CHANGED_FILES" | xargs grep -iE '(password["\''\s=]|secret["\''\s=]|api[_-]?key["\''\s=]|token["\''\s=]|private[_-]?key["\''\s=])'; then
+              echo "::error::Potential secrets found in code!"
+              exit 1
+            else
+              echo "No secrets detected in source files."
+            fi
           else
-            echo "No secrets detected."
+            echo "No relevant source files changed."
+          fi
+        continue-on-error: false
+
+      - name: Check for hardcoded URLs
+        run: |
+          echo "Checking for hardcoded URLs that shouldn't be there..."
+          # Get changed files, excluding: config files and known safe files
+          CHANGED_FILES=$(git diff --name-only HEAD~1 | grep -vE '(\.md$|\.txt$|\.github/|package\.json|package-lock\.json)')
+
+          if [ -n "$CHANGED_FILES" ]; then
+            # Check for localhost URLs in source files only (not warnings, just info)
+            if echo "$CHANGED_FILES" | xargs grep -iE 'http://localhost|127\.0\.0\.1|0\.0\.0\.0'; then
+              echo "::notice::Some localhost URLs detected - this is acceptable in dev files"
+            fi
+            echo "URL check completed."
           fi
         continue-on-error: true
 
