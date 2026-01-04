@@ -36,36 +36,26 @@ jobs:
       - name: Check for secrets
         run: |
           echo "Checking for leaked secrets in codebase..."
-          # Get changed files, excluding: docs, config files, and known safe files
-          CHANGED_FILES=$(git diff --name-only HEAD~1 | grep -vE '(\.md$|\.txt$|\.github/|package\.json|package-lock\.json|SECURITY_CHANGES|README)')
-
-          if [ -n "$CHANGED_FILES" ]; then
-            # Check for potential secrets in source files only
-            # More specific patterns to avoid false positives in docs
-            if echo "$CHANGED_FILES" | xargs grep -iE '(password["\''\s=]|secret["\''\s=]|api[_-]?key["\''\s=]|token["\''\s=]|private[_-]?key["\''\s=])'; then
-              echo "::error::Potential secrets found in code!"
-              exit 1
-            else
-              echo "No secrets detected in source files."
-            fi
+          # Scan all source files, excluding: docs, config files and known safe files
+          echo "Scanning for secrets in source files (.astro, .ts, .js, .tsx, .jsx)..."
+          if grep -r -iE '(password["\''\s=]|secret["\''\s=]|api[_-]?key["\''\s=]|token["\''\s=]|private[_-]?key["\''\s=])' --include='*.astro' --include='*.ts' --include='*.tsx' --include='*.js' --include='*.jsx' --exclude-dir=node_modules --exclude-dir=.astro --exclude-dir=dist src/ public/ 2>/dev/null; then
+            echo "::error::Potential secrets found in source files!"
+            exit 1
           else
-            echo "No relevant source files changed."
+            echo "✅ No secrets detected in source files."
           fi
         continue-on-error: false
 
       - name: Check for hardcoded URLs
         run: |
           echo "Checking for hardcoded URLs that shouldn't be there..."
-          # Get changed files, excluding: config files and known safe files
-          CHANGED_FILES=$(git diff --name-only HEAD~1 | grep -vE '(\.md$|\.txt$|\.github/|package\.json|package-lock\.json)')
-
-          if [ -n "$CHANGED_FILES" ]; then
-            # Check for localhost URLs in source files only (not warnings, just info)
-            if echo "$CHANGED_FILES" | xargs grep -iE 'http://localhost|127\.0\.0\.1|0\.0\.0\.0'; then
-              echo "::notice::Some localhost URLs detected - this is acceptable in dev files"
-            fi
-            echo "URL check completed."
+          # Scan for problematic URLs in source files
+          echo "Scanning for hardcoded URLs in source files..."
+          if grep -r -iE 'http://localhost|127\.0\.0\.1|0\.0\.0\.0' --include='*.astro' --include='*.ts' --include='*.tsx' --include='*.js' --include='*.jsx' --exclude-dir=node_modules --exclude-dir=.astro --exclude-dir=dist src/ public/ 2>/dev/null; then
+            echo "::notice::Some localhost URLs detected - this is acceptable in dev files"
+            echo "ℹ️  Found localhost references (this is normal for development)"
           fi
+          echo "✅ URL check completed."
         continue-on-error: true
 
       - name: Check for hardcoded URLs
